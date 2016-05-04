@@ -3,7 +3,7 @@ feature 'add a tag' do
     visit '/links/new'
     fill_in :Title, with:  'eBay'
     fill_in :URL, with: 'www.ebay.com'
-    fill_in :Tag, with: 'Shopping'
+    fill_in :tag, with: 'Shopping'
     click_button "Save"
     link = Link.first
     expect(link.tag.map(&:name)).to include("Shopping")

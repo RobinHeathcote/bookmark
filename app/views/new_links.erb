@@ -1,6 +1,18 @@
-<form action="/links" method="post">
-  <input type="text" name="Title">
-  <input type="text" name="URL">
-  <input type="text" name="Tag">
-  <input type="submit" value="Save">
+<h1> New Link </h1>
+
+<form action='/links' method='POST'>
+  <label for='title'>
+    Title:
+    <input type='text' name='Title' />
+  </label>
+  <label for='url'>
+    URL:
+    <input type='text' name='URL' />
+  </label>
+  <label for='tag'>
+    Tags:
+    <input type='text' name='tag' />
+  </label>
+  <input type='submit' value='Save' />
+
 </form>
