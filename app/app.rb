@@ -6,7 +6,15 @@ require 'sinatra/flash'
 class BookmarkManager < Sinatra::Base
   enable :sessions
   register Sinatra::Flash
+  use Rack::MethodOverride
   set :session_secret, 'super secret'
+
+  helpers do
+   def current_user
+     @current_user ||= User.get(session[:user_id])
+   end
+  end
+
 
   get '/links' do
     @links = Link.all
@@ -64,11 +72,16 @@ class BookmarkManager < Sinatra::Base
     end
   end
 
-  helpers do
-   def current_user
-     @current_user ||= User.get(session[:user_id])
-   end
- end
+
+
+  delete '/sessions' do
+
+    session[:user_id] = nil
+    flash.keep[:notice] = 'goodbye!'
+    redirect to '/links'
+  end
+
+
 
   # start the server if ruby file executed directly
   run! if app_file == $0
